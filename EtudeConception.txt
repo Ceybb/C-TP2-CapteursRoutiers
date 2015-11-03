@@ -20,3 +20,13 @@ etatCapteur (int)
 Attributs : 
 données (tableau à deux dimentions : - des int qui vont correspondre au jour de la semaine (1 pour lundi, 2 pour mardi, etc...)
                                      - des objets de type Instant 
+
+En résumé on aura : 
+
+|  1  |  2  |  3  |  4  |  5  |  6  |  7  |    (jours de la semaine)
+-------------------------------------------
+|  I  |  I  |  I  |  I  |  I  |  I  |  I  |    (instants qui correspondent à des heures pendant lesquelles
+|  I  |  I  |  I  |  I  |  I  |  I  |  I  |     des mesures ont été effectuées)
+|  I  |  I  |  I  |  I  |  I  |  I  |  I  |    (chaque intant I contient la minute exacte à laquelle la 
+|  I  |  I  |  I  |  I  |  I  |  I  |  I  |     mesure a été effectuée, le capteur en question et son état)
+
