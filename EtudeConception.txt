@@ -1,1 +1,22 @@
 Etude conception :
+
+3 classes : (noms des classes à revoir^^)
+
+1) Une classe Instant
+Attributs :
+mois (int)
+jour (int)
+heure (int)
+nbMesures (int) (permet de gérer dynamiquement le tableau mesure)
+mesures (tableau dynamique contenant des objets de type Mesure)
+
+2) Une classe Mesure
+Attributs :
+minute (int)
+idCapteur (int)
+etatCapteur (int)
+
+3) Une classe ClasseGenerale
+Attributs : 
+données (tableau à deux dimentions : - des int qui vont correspondre au jour de la semaine (1 pour lundi, 2 pour mardi, etc...)
+                                     - des objets de type Instant 
