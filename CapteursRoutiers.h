@@ -32,7 +32,11 @@ public:
     //
     // Contrat :
     //
-
+    
+  void Lecture (int idCapteur, int mois, int jour, int heure, int minute, int jourSemaine, char trafic);
+	// Mode d'emploi :
+	// Ajoute les infos données en entrée à tabValeurs
+	// Contrat : aucun
 
 //------------------------------------------------- Surcharge d'opérateurs
     CapteursRoutiers & operator = ( const CapteursRoutiers & unCapteursRoutiers );
