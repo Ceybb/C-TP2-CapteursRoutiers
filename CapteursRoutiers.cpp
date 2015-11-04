@@ -33,6 +33,11 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
+void CapteursRoutiers::Lecture (int idCapteur, int mois, int jour, int heure, int minute, int jourSemaine, char trafic)
+// Algorithme : aucun
+{
+	tabValeurs[jourSemaine][mois][jour][heure][minute][idCapteur]= trafic;
+} //----- Fin de Méthode
 
 //------------------------------------------------- Surcharge d'opérateurs
 /* CapteursRoutiers & CapteursRoutiers::operator = ( const CapteursRoutiers & unCapteursRoutiers )
