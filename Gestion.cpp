@@ -4,35 +4,55 @@ using namespace std;
 
 int main(void) 
 {
-	string sortie;
-	string lecture;
-	string statsC;
-	string embouteillage;
-	string stats;
-	string optimal;
+	string commande;
+	int idCapteur;
+	int annee;
+	int mois;
+	int jour;
+	int heure;
+	int min;
+	int jourSemaine;
+	char trafic;
 
-  while (cin>>sortie != "EXIT")
+  while (cin>>commande != "EXIT")
   {
-    if (cin>>lecture == "ADD")
+    if (commande == "ADD")
     {
     	// Exécuter la méthode lecture
+		cout << " Boucle lecture " << endl;
+		cin >> idCapteur >> annee >> mois >> jour >> heure >> min >> jourSemaine >> trafic;
+		cout << idCapteur << " / " << annee << " / " << mois << " / " << jour << " / " << heure <<" / " << min << " / " << jourSemaine << " / " << trafic << endl;
 	}
-    if (cin>>statsC == "STATS_C")
+    else if (commande == "STATS_C")
     {
     	//Exécuter la méthode StatsCapteur
+    	cout << " Boucle StatsCapteur " << endl;
+    	cin >> idCapteur;
+    	cout << idCapteur << endl;
     }
-    if (cin>>embouteillage == "JAM_DH")
+    else if (commande == "JAM_DH")
     {
     	// Exécuter la méthode Embouteillage
+    	cout << " Boucle Embouteillage " << endl;
+    	cin >> jourSemaine;
+    	cout << jourSemaine << endl;
     }
-	if (cin>>stats == "STATS_D7")
+    else if (commande == "STATS_D7")
 	{
-		//Exécuter la méthode StatsCapteur
+		//Exécuter la méthode StatsJour
+		cout << " Boucle StatsJour " << endl;
+		cin >> jourSemaine;
+		cout << jourSemaine << endl;
+
     }
-	if (cin>>optimal == "OPT")
+    else if (commande == "OPT")
 	{
 		//Exécuter la méthode Optimisation
+		cout << " Boucle Optimisation " << endl;
+    	/* cin >> ?; A faire
+		cout << ? << endl;*/
 	}
+	cin >> commande;
   }
   return 0;
 }
