@@ -17,7 +17,7 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 //----------------------------------------------------- Méthodes publiques
 void TestMesure1() {
-	Mesure mesure();
+	Mesure mesure;
 } //----- Fin de Méthode
 
 void TestMesure2() {
