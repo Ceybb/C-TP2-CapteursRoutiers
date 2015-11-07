@@ -12,23 +12,40 @@
 using namespace std;
 #include <iostream>
 //------------------------------------------------------ Include personnel
-#include "DateHeure.h"
 #include "Mesure.h"
+#include "DateHeure.h"
+
 
 
 //----------------------------------------------------------------- PUBLIC
 //----------------------------------------------------- Méthodes publiques
-void DateHeure::Ajuster ()
+bool DateHeure::Comparer (DateHeure DH)
 {
-	int AncienNbMesures=nbMesures;
-	nbMesures=1.5*nbMesures;
-	Mesure * tabAjuste = new Mesure[nbMesures];
-	for (int i=0;i<AncienNbMesures;i++)
-	{	tabAjuste[i]=mesures[i];
+	if (mois==DH.mois && jour==DH.jour && heure==DH.heure)
+	{	return true;
+	} else
+	{	return false;
 	}
-	delete [] mesures;
-	mesures=tabAjuste;
-} //----- Fin de Méthode
+}
+
+void DateHeure::Ajouter (int minuteM, int idI, int etatE)
+{
+	if (nbMesuresCourant==nbMesuresMax)
+	{	Ajuster();
+	}
+	mesures[nbMesuresCourant].Modifier(minuteM, idI, etatE);
+	nbMesuresCourant++;
+}
+
+void DateHeure::Afficher (int option) const
+{
+	cout << mois << " / " << jour << " / " << heure << " / " << nbMesuresCourant << "/" << nbMesuresMax <<  endl;
+	if (option==1)
+		{	for (int i=0;i<nbMesuresCourant;i++)
+			{	mesures[i].Afficher();
+			}
+		}
+}
 
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -40,7 +57,8 @@ DateHeure::DateHeure (int moisM, int jourJ, int heureH)
     mois=moisM;
     jour=jourJ;
     heure=heureH;
-    nbMesures=10000;
+    nbMesuresCourant=0;
+    nbMesuresMax=10000;
     mesures = new Mesure[10000];
 } //----- Fin de DateHeure
 
@@ -52,3 +70,18 @@ DateHeure::~DateHeure ( )
 #endif
     delete [] mesures;
 } //----- Fin de ~DateHeure
+
+
+//------------------------------------------------------------------ PRIVE
+//------------------------------------------------------- Méthodes privées
+void DateHeure::Ajuster ()
+{
+	int AncienNbMesuresMax=nbMesuresMax;
+	nbMesuresMax=1.5*nbMesuresMax;
+	Mesure * tabAjuste = new Mesure[nbMesuresMax];
+	for (int i=0;i<AncienNbMesuresMax;i++)
+	{	tabAjuste[i]=mesures[i];
+	}
+	delete [] mesures;
+	mesures=tabAjuste;
+} //----- Fin de Méthode
