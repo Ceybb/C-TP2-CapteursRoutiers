@@ -20,18 +20,19 @@ class Mesure
 {
 //----------------------------------------------------------------- PUBLIC
 public:
-//-------------------------------------------- Constructeurs - destructeur
-    Mesure (int minuteM, int idI, int etatE);
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+//----------------------------------------------------- Méthodes publiques
+	void Modifier (int minuteM, int idI, int etatE);
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
 
-    Mesure ();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+	void Afficher() const;
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
+
 
 //------------------------------------------------------------------ PRIVE
 private:
