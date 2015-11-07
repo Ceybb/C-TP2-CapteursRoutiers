@@ -16,25 +16,16 @@ using namespace std;
 
 #define MAP
 
-//-------------------------------------------- Constructeurs - destructeur
-Mesure::Mesure (int minuteM, int idI, int etatE)
+//----------------------------------------------------------------- PUBLIC
+//----------------------------------------------------- Méthodes publiques
+void Mesure::Modifier (int minuteM, int idI, int etatE)
 {
-    minute=minuteM;
-    id=idI;
-    etat=etatE;
-#ifdef MAP
-cout << "Appel au constructeur de <Mesure>" << endl;
-cout << minute << " / " << id << " / " << etat << endl;
-#endif
-} //----- Fin de Mesure
+	minute=minuteM;
+	id=idI;
+	etat=etatE;
+}
 
-Mesure::Mesure ()
+void Mesure::Afficher () const
 {
-    minute=0;
-    id=0;
-    etat='A';
-#ifdef MAP
-cout << "Appel au constructeur de <Mesure>" << endl;
-cout << minute << " / " << id << " / " << etat << endl;
-#endif
-} //----- Fin de Mesure
+	cout << minute << " / " << id << " / " << etat << endl;
+}
