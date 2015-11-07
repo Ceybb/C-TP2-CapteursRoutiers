@@ -22,11 +22,23 @@ class DateHeure
 //----------------------------------------------------------------- PUBLIC
 public:
 //----------------------------------------------------- Méthodes publiques
-    void Ajuster ();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+	bool Comparer (DateHeure DH);
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
+
+	void Ajouter (int minuteM, int idI, int etatE);
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
+
+	void Afficher (int option) const;
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
 
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -45,11 +57,20 @@ public:
 
 //------------------------------------------------------------------ PRIVE
 private:
+//------------------------------------------------------- Méthodes privées
+    void Ajuster ();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+
 //------------------------------------------------------- Attributs privés
     int mois;
     int jour;
     int heure;
-    int nbMesures;
+    int nbMesuresCourant;
+    int nbMesuresMax;
     Mesure * mesures;
 
 
