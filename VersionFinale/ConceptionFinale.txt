@@ -12,12 +12,19 @@ int heure
 int nbMesures        // taille de mesures modifié dynamiquement
 Mesure * mesures     // tableau dynamique d'objets de type Mesure 
 -> on a le droit d'utiliser les tableaux dynamiques (vector) ?
+Non on peut pas directement utiliser vector, on doit tout implémenter un peu comme pour le premier tp (nbElemtCourant,
+nbElemtMax,tab et gestion de l'ajout, de l'ajustement, tout ca tout ca...)
 
 3) une classe ListeDateHeure
 Une liste simplement chainee d'objets de type DateHeure avec un pointeur permanent vers la dernière maille
 permettant d'accéder à la dernière maille ou d'ajouter une maille en bout de liste sans avoir à parcourrir toute la liste
 -> pointeur permanent, c'est à dire? 
+Un pointeur qui va toujours (cest ce que j'entendais par "de maniere permanente") pointé vers la dernière maille de la liste :
+si ya 5 maille il pointe vers la 5eme
+on rajoute une 6eme maille, faut lui demander de pointer vers la 6eme
+le but etant de toujours avoir acces rapidement a la derniere maille sans devoir parcourir toute la liste
 
 4) une classe CapteursRoutiers
 ListeDateHeure tableau[7]    // un tableau de taille 7 (pour chaque jour de la semaine) contenant des objets de type ListeDateHeure
                               // nom du tableau a changer -> jourSemaine ?
+                              Ouai pourquoi pas !! :D
