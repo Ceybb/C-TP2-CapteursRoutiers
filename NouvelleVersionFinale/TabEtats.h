@@ -33,7 +33,11 @@ public:
     // Contrat :
     //
 
-
+	void Ajouter (int mois, int jour, int heure, int minute, int jourSemaine, char trafic);
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
 
 
 //-------------------------------------------- Constructeurs - destructeur
