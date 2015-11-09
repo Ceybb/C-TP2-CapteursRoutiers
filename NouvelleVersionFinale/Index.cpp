@@ -48,8 +48,47 @@ void Index::Afficher () const
 	}
 }
 
+/*codeRetour Index::AjouterDate (int mois, int jour, int heure, int minute, int jourSemaine)
+{
+	codeRetour unCodeRetour=nbCapteursMaxNonAjuste;
+	if (nbCapteursCourant==nbCapteursMax)
+	{	Ajuster();
+		unCodeRetour=nbCapteursMaxAjuste;
+	}
+	index[nbCapteursCourant];
+	nbCapteursCourant++;
+	return unCodeRetour;
+}*/
 
+int Index::TestId (int unId)
+{
+	int idExiste = -1;
+	for (int i=0;i<nbCapteursCourant;i++)
+	{	if(id[i]==unId)
+		{idExiste=i;
+		break;
+		}
+	}
+	return idExiste;
+} //----- Fin de Méthode
 
+void Index::Lecture(int idCapteur, int mois, int jour, int heure, int minute, int jourSemaine, char trafic)
+{
+	int testId=TestId(idCapteur);
+	TabEtats * pointeur;
+	pointeur=index[nbCapteursCourant-1];
+	TabEtats tab;
+	tab=*(index[nbCapteursCourant-1]);
+	if(testId==-1)
+	{
+		AjouterId(idCapteur);
+	//	*(index[nbCapteursCourant-1]).Ajouter(int mois, int jour, int heure, int min, int jourSem, char trafic);
+	}
+	else
+	{
+	//	*(index[testId]).Ajouter(int mois, int jour, int heure, int min, int jourSem, char trafic);
+	}
+}
 //-------------------------------------------- Constructeurs - destructeur
 Index::Index ()
 {
