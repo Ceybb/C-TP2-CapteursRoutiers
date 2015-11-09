@@ -33,8 +33,23 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-
-
+void TabEtats::Ajouter (int mois, int jour, int heure, int minute, int jourSemaine, char trafic)
+{
+	int numJour=0;
+	if(8<=jour && jour<=14)
+	{numJour=1;
+	}
+	else if(15<=jour && jour<=21)
+		{numJour=2;
+		}
+	else if(22<=jour && jour<=28)
+		{numJour=3;
+		}
+	else if(29<=jour && jour<=31)
+		{numJour=4;
+		}
+	tabEtats[jourSemaine][mois][numJour][heure][minute]=trafic;
+} //} //----- Fin de Méthode
 
 
 //-------------------------------------------- Constructeurs - destructeur
