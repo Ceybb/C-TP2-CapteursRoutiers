@@ -36,7 +36,24 @@ public:
     // Contrat :
     //
 
+	int TestId (int unId);
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
     void Afficher () const;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    codeRetour AjouterDate (int mois, int jour, int heure, int minute, int jourSemaine);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    void Lecture (int idCapteur, int mois, int jour, int heure, int minute, int jourSemaine, char trafic);
     // Mode d'emploi :
     //
     // Contrat :
