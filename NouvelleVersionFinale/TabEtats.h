@@ -27,18 +27,29 @@ class TabEtats
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste de paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-	void Ajouter (int mois, int jour, int heure, int minute, int jourSemaine, char trafic);
+	void Afficher () const;
 	// Mode d'emploi :
 	//
 	// Contrat :
 	//
 
+	void AjouterMesure (int mois, int jour, int heure, int minute, int jourSemaine, char trafic);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+	void StatsJSem (int jourSemaine,int &etatV, int &etatJ, int &etatR, int &etatN, int &nbMesures);
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
+
+	void EmbouteillageJSemHeure (int jourSemaine,int * &tabEtatsHeures, int * &nbMesures);
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
 
 //-------------------------------------------- Constructeurs - destructeur
     TabEtats ( );
