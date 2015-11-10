@@ -36,6 +36,7 @@ codeRetour Index::AjouterId (int unId)
 		unCodeRetour=nbCapteursMaxAjuste;
 	}
 	id[nbCapteursCourant]=unId;
+	index[nbCapteursCourant]=new TabEtats;
 	nbCapteursCourant++;
 	return unCodeRetour;
 } //----- Fin de Méthode
@@ -45,6 +46,7 @@ void Index::Afficher () const
 	cout << nbCapteursCourant << "/" << nbCapteursMax << endl;
 	for (int i=0;i<nbCapteursCourant;i++)
 	{	cout << id[i] << endl;
+		(*(index[i])).Afficher();
 	}
 }
 
@@ -60,7 +62,7 @@ void Index::Afficher () const
 	return unCodeRetour;
 }*/
 
-int Index::TestId (int unId)
+int Index::ComparerId (int unId)
 {
 	int idExiste = -1;
 	for (int i=0;i<nbCapteursCourant;i++)
@@ -74,21 +76,63 @@ int Index::TestId (int unId)
 
 void Index::Lecture(int idCapteur, int mois, int jour, int heure, int minute, int jourSemaine, char trafic)
 {
-	int testId=TestId(idCapteur);
-	TabEtats * pointeur;
-	pointeur=index[nbCapteursCourant-1];
-	TabEtats tab;
-	tab=*(index[nbCapteursCourant-1]);
+	int testId=ComparerId(idCapteur);
 	if(testId==-1)
 	{
 		AjouterId(idCapteur);
-	//	*(index[nbCapteursCourant-1]).Ajouter(int mois, int jour, int heure, int min, int jourSem, char trafic);
+		(*(index[nbCapteursCourant-1])).AjouterMesure(mois-5,jour-1,heure,minute,jourSemaine-1,trafic);
 	}
 	else
 	{
-	//	*(index[testId]).Ajouter(int mois, int jour, int heure, int min, int jourSem, char trafic);
+		(*(index[testId])).AjouterMesure(mois-5,jour-1,heure,minute,jourSemaine-1,trafic);
 	}
 }
+
+void Index::StatsJSem (int jourSemaine)
+{
+	int etatV=0;
+	int etatJ=0;
+	int etatR=0;
+	int etatN=0;
+	int nbMesures=0;
+	for (int i=0;i<nbCapteursCourant;i++)
+	{
+		(*index[i]).StatsJSem(jourSemaine-1,etatV,etatJ,etatR,etatN,nbMesures);
+	}
+	if (nbMesures==0)
+	{	cout << "V " << "UNKNOWN" << "%" << endl;
+	cout << "J " << "UNKNOWN" << "%" << endl;
+	cout << "R " << "UNKNOWN" << "%" << endl;
+	cout << "N " << "UNKNOWN" << "%" << endl;
+	} else
+	{	cout << "V " << etatV*100/nbMesures << "%" << endl;
+	cout << "J " << etatJ*100/nbMesures << "%" << endl;
+	cout << "R " << etatR*100/nbMesures << "%" << endl;
+	cout << "N " << etatN*100/nbMesures << "%" << endl;
+	}
+}
+
+void Index::EmbouteillageJSemHeure (int jourSemaine)
+{
+	int * tabEtatsHeures = new int [24];
+	int * nbMesuresHeures = new int [24];
+	for (int i=0;i<24;i++)
+	{	tabEtatsHeures[i]=0;
+		nbMesuresHeures[i]=0;
+	}
+	for (int i=0;i<nbCapteursCourant;i++)
+	{
+		(*index[i]).EmbouteillageJSemHeure(jourSemaine-1,tabEtatsHeures,nbMesuresHeures);
+	}
+	for (int i=0;i<24;i++)
+	{	if (nbMesuresHeures[i]==0)
+		{	cout << jourSemaine << " " << i << " " << "UNKNOWN" << endl;
+		} else
+		{	cout << jourSemaine << " " << i << " " << tabEtatsHeures[i]*100/nbMesuresHeures[i] << "%" << endl;
+		}
+	}
+}
+
 //-------------------------------------------- Constructeurs - destructeur
 Index::Index ()
 {
