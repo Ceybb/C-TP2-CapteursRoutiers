@@ -36,18 +36,19 @@ public:
     // Contrat :
     //
 
-	int TestId (int unId);
+	int ComparerId (int unId);
 	// Mode d'emploi :
 	//
-	// Contrat :
-	//
+    // Contrat :
+    //
+
     void Afficher () const;
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    codeRetour AjouterDate (int mois, int jour, int heure, int minute, int jourSemaine);
+    //codeRetour AjouterDate (int mois, int jour, int heure, int minute, int jourSemaine);
     // Mode d'emploi :
     //
     // Contrat :
@@ -59,8 +60,13 @@ public:
     // Contrat :
     //
 
-//------------------------------------------------- Surcharge d'opérateurs
-    Index & operator = ( const Index & unIndex );
+    void StatsJSem (int jourSemaine);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    void EmbouteillageJSemHeure (int jourSemaine);
     // Mode d'emploi :
     //
     // Contrat :
