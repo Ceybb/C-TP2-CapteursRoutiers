@@ -27,13 +27,45 @@ using namespace std;
 //-------------------------------------------------------- Fonctions amies
 
 //----------------------------------------------------- Méthodes publiques
-// type TabEtats::Méthode ( liste de paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
+void TabEtats::Afficher () const
+{
+	int etatA=0;
+	int etatV=0;
+	int etatJ=0;
+	int etatR=0;
+	int etatN=0;
+	for (int jourSem=0;jourSem<7;jourSem++)
+	{	for (int mois=0;mois<5;mois++)
+		{	for (int numJour=0;numJour<5;numJour++)
+			{	for (int heure=0;heure<24;heure++)
+				{	for (int minute=0;minute<60;minute++)
+					{	switch (tabEtats[jourSem][mois][numJour][heure][minute])
+						{
+							case 'A':
+								etatA++;
+								break;
+							case 'V':
+								etatV++;
+								break;
+							case 'J':
+								etatJ++;
+								break;
+							case 'R':
+								etatR++;
+								break;
+							case 'N':
+								etatN++;
+								break;
+						}
+					}
+				}
+			}
+		}
+	}
+	cout << etatA << " | " << etatV << " | " << etatJ << " | " << etatR << " | " <<  etatN << endl;
+}
 
-void TabEtats::Ajouter (int mois, int jour, int heure, int minute, int jourSemaine, char trafic)
+void TabEtats::AjouterMesure (int mois, int jour, int heure, int minute, int jourSemaine, char trafic)
 {
 	int numJour=0;
 	if(8<=jour && jour<=14)
@@ -50,6 +82,65 @@ void TabEtats::Ajouter (int mois, int jour, int heure, int minute, int jourSemai
 		}
 	tabEtats[jourSemaine][mois][numJour][heure][minute]=trafic;
 } //} //----- Fin de Méthode
+
+
+void TabEtats::StatsJSem (int jourSemaine,int &etatV, int &etatJ, int &etatR, int &etatN, int &nbMesures)
+{
+	for (int mois=0;mois<5;mois++)
+	{	for (int numJour=0;numJour<5;numJour++)
+		{	for (int heure=0;heure<24;heure++)
+			{	for (int minute=0;minute<60;minute++)
+				{	switch (tabEtats[jourSemaine][mois][numJour][heure][minute])
+					{	case 'V':
+							etatV++;
+							nbMesures++;
+							break;
+						case 'J':
+							etatJ++;
+							nbMesures++;
+							break;
+						case 'R':
+							etatR++;
+							nbMesures++;
+							break;
+						case 'N':
+							etatN++;
+							nbMesures++;
+							break;
+					}
+				}
+			}
+		}
+	}
+}
+
+void TabEtats::EmbouteillageJSemHeure (int jourSemaine,int * &tabEtatsHeures, int * &nbMesures)
+{	for (int mois=0;mois<5;mois++)
+	{	for (int numJour=0;numJour<5;numJour++)
+		{	for (int heure=0;heure<24;heure++)
+			{	for (int minute=0;minute<60;minute++)
+				{	switch (tabEtats[jourSemaine][mois][numJour][heure][minute])
+					{	case 'V':
+							nbMesures[heure]++;
+							break;
+						case 'J':
+							nbMesures[heure]++;
+							break;
+						case 'R':
+							tabEtatsHeures[heure]++;
+							nbMesures[heure]++;
+						break;
+						case 'N':
+							tabEtatsHeures[heure]++;
+							nbMesures[heure]++;
+						break;
+					}
+				}
+			}
+		}
+	}
+}
+
 
 
 //-------------------------------------------- Constructeurs - destructeur
