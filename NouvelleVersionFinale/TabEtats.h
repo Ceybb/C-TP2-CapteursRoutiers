@@ -39,6 +39,12 @@ public:
     // Contrat :
     //
 
+	void StatsCapteur (int &etatV, int &etatJ, int &etatR, int &etatN, int &nbMesures);
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
+
 	void StatsJSem (int jourSemaine,int &etatV, int &etatJ, int &etatR, int &etatN, int &nbMesures);
 	// Mode d'emploi :
 	//
