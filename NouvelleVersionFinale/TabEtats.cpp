@@ -83,6 +83,38 @@ void TabEtats::AjouterMesure (int mois, int jour, int heure, int minute, int jou
 	tabEtats[jourSemaine][mois][numJour][heure][minute]=trafic;
 } //} //----- Fin de Méthode
 
+void TabEtats::StatsCapteur (int &etatV, int &etatJ, int &etatR, int &etatN, int &nbMesures)
+{
+	for (int jourSemaine=0;jourSemaine<7;jourSemaine++)
+	{	for (int mois=0;mois<5;mois++)
+		{	for (int numJour=0;numJour<5;numJour++)
+			{	for (int heure=0;heure<24;heure++)
+				{	for (int minute=0;minute<60;minute++)
+					{	switch (tabEtats[jourSemaine][mois][numJour][heure][minute])
+						{	case 'V':
+								etatV++;
+								nbMesures++;
+								break;
+							case 'J':
+								etatJ++;
+								nbMesures++;
+								break;
+							case 'R':
+								etatR++;
+								nbMesures++;
+								break;
+							case 'N':
+								etatN++;
+								nbMesures++;
+								break;
+						}
+					}
+				}
+			}
+
+		}
+	}
+}
 
 void TabEtats::StatsJSem (int jourSemaine,int &etatV, int &etatJ, int &etatR, int &etatN, int &nbMesures)
 {
