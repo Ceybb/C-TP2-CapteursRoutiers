@@ -60,6 +60,12 @@ public:
     // Contrat :
     //
 
+    void StatsCapteur (int idCapteur);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
     void StatsJSem (int jourSemaine);
     // Mode d'emploi :
     //
