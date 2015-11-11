@@ -11,10 +11,6 @@
 
 #include "TabEtats.h"
 
-//--------------------------------------------------- Interfaces utilisées
-
-//------------------------------------------------------------- Constantes
-
 //------------------------------------------------------------------ Types
 enum codeRetour {nbCapteursMaxNonAjuste, nbCapteursMaxAjuste};
 
@@ -30,13 +26,13 @@ class Index
 
 public:
 //----------------------------------------------------- Méthodes publiques
-	codeRetour AjouterId (int id);
+	codeRetour AjouterId ( int id );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-	int ComparerId (int unId);
+	int ComparerId ( int unId );
 	// Mode d'emploi :
 	//
     // Contrat :
@@ -48,31 +44,48 @@ public:
     // Contrat :
     //
 
-    //codeRetour AjouterDate (int mois, int jour, int heure, int minute, int jourSemaine);
+    void Lecture ( int idCapteur, int mois, int jour, int heure,
+    			   int minute, int jourSemaine, char trafic );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    void Lecture (int idCapteur, int mois, int jour, int heure, int minute, int jourSemaine, char trafic);
+    void StatsCapteur ( int idCapteur );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    void StatsCapteur (int idCapteur);
+    void StatsJSem ( int jourSemaine );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    void StatsJSem (int jourSemaine);
+    void EmbouteillageJSemHeure ( int jourSemaine );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    void EmbouteillageJSemHeure (int jourSemaine);
+    int TempsParcoursSegment( int idCapteur, int jourSemaine,
+    						  int heure, int minute );
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    int TempsParcoursEnsembleSegments ( int nbCapteurs, int * idCapteur,
+    									int jourSemaine, int heureDebut,
+										int minuteDebut, int &heureFin );
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    void MomentDepartOpti ( int nbCapteurs, int * idCapteur,
+    					int jourSemaine, int heureDebut, int heureFin );
     // Mode d'emploi :
     //
     // Contrat :
@@ -94,31 +107,16 @@ public:
 
 //------------------------------------------------------------------ PRIVE
 
-protected:
-//----------------------------------------------------- Méthodes protégées
-
 private:
 //------------------------------------------------------- Méthodes privées
     void Ajuster ();
 
-protected:
-//----------------------------------------------------- Attributs protégés
-
-private:
 //------------------------------------------------------- Attributs privés
     int nbCapteursCourant;
     int nbCapteursMax;
     int * id;
     TabEtats ** index;
 
-//---------------------------------------------------------- Classes amies
-
-//-------------------------------------------------------- Classes privées
-
-//----------------------------------------------------------- Types privés
-
 };
-
-//----------------------------------------- Types dépendants de <Index>
 
 #endif // INDEX_H
