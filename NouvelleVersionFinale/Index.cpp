@@ -88,6 +88,31 @@ void Index::Lecture(int idCapteur, int mois, int jour, int heure, int minute, in
 	}
 }
 
+void Index::StatsCapteur (int idCapteur)
+{
+	int etatV=0;
+	int etatJ=0;
+	int etatR=0;
+	int etatN=0;
+	int nbMesures=0;
+	int compteur=0;
+	while (id[compteur]!=idCapteur)
+	{	compteur++;
+	}
+	(*index[compteur]).StatsCapteur(etatV,etatJ,etatR,etatN,nbMesures);
+	if (nbMesures==0)
+	{	cout << "V " << "UNKNOWN" << "%" << endl;
+		cout << "J " << "UNKNOWN" << "%" << endl;
+		cout << "R " << "UNKNOWN" << "%" << endl;
+		cout << "N " << "UNKNOWN" << "%" << endl;
+	} else
+	{	cout << "V " << etatV*100/nbMesures << "%" << endl;
+		cout << "J " << etatJ*100/nbMesures << "%" << endl;
+		cout << "R " << etatR*100/nbMesures << "%" << endl;
+		cout << "N " << etatN*100/nbMesures << "%" << endl;
+	}
+}
+
 void Index::StatsJSem (int jourSemaine)
 {
 	int etatV=0;
@@ -131,6 +156,8 @@ void Index::EmbouteillageJSemHeure (int jourSemaine)
 		{	cout << jourSemaine << " " << i << " " << tabEtatsHeures[i]*100/nbMesuresHeures[i] << "%" << endl;
 		}
 	}
+	delete tabEtatsHeures;
+	delete nbMesuresHeures;
 }
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -152,6 +179,9 @@ Index::~Index ( )
     cout << "Appel au destructeur de <Index>" << endl;
 #endif
     delete [] id;
+    for (int i=0;i<nbCapteursCourant;i++)
+    {	delete index[i];
+    }
     delete [] index;
 } //----- Fin de ~Index
 
