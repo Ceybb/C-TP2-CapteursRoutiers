@@ -24,7 +24,6 @@ void TestsTabEtatsConstructeur1 ()
 {
 	TabEtats unTabEtats;
 	unTabEtats.Afficher();
-
 }
 
 void TestsTabEtatsAjouterMesure1 ()
@@ -32,6 +31,27 @@ void TestsTabEtatsAjouterMesure1 ()
 	TabEtats unTabEtats;
 	unTabEtats.AjouterMesure(2,24,5,21,3,'V');
 	unTabEtats.Afficher();
+}
+
+void TestsTabEtatsStatsCapteur1 ()
+{
+	TabEtats tab;
+	int etatV=0;
+	int etatJ=0;
+	int etatR=0;
+	int etatN=0;
+	int nbMesures=0;
+	tab.AjouterMesure(3,12,17,45,3,'V');
+	tab.AjouterMesure(1,17,11,21,3,'J');
+	tab.AjouterMesure(2,5,9,33,3,'J');
+	tab.AjouterMesure(4,21,5,37,3,'N');
+	tab.AjouterMesure(0,28,14,51,3,'R');
+	tab.StatsCapteur(etatV,etatJ,etatR,etatN,nbMesures);
+	cout << etatV << endl;
+	cout << etatJ << endl;
+	cout << etatR << endl;
+	cout << etatN << endl;
+	cout << nbMesures << endl;
 }
 
 void TestsTabEtatsStatsJSem1 ()
@@ -73,6 +93,8 @@ void TestsTabEtatEmbouteillageJSemHeure1 ()
 	for (int i=0;i<24;i++)
 	{	cout << "heure : " << i << " : " << tabEtatsHeures[i] << " / " << nbMesures[i] << endl;
 	}
+	delete tabEtatsHeures;
+	delete nbMesures;
 }
 
 void TestsIndexConstructeur1 ()
@@ -84,7 +106,6 @@ void TestsIndexConstructeur1 ()
 void TestsIndexAjouterId1 ()
 {
 	Index unIndex;
-	TabEtats unTabEtats;
 	codeRetour unCodeRetour=unIndex.AjouterId(0);
 	cout << unCodeRetour << endl;
 	unIndex.Afficher();
@@ -93,7 +114,6 @@ void TestsIndexAjouterId1 ()
 void TestsIndexAjouterId2 ()
 {
 	Index unIndex;
-	TabEtats unTabEtats;
 	codeRetour unCodeRetour=unIndex.AjouterId(1243);
 	cout << unCodeRetour << endl;
 	unIndex.Afficher();
@@ -183,6 +203,18 @@ void TestsIndexLecture1 ()
 	unIndex.Afficher();
 }
 
+void TestsIndexStatsCapteur1 ()
+{
+	Index unIndex;
+	unIndex.Lecture(458,8,11,4,17,5,'V');
+	unIndex.Lecture(1124,9,24,21,44,1,'J');
+	unIndex.Lecture(1124,6,5,17,22,3,'J');
+	unIndex.Lecture(1124,9,26,14,55,3,'R');
+	unIndex.Lecture(748,7,19,23,12,2,'N');
+	unIndex.Lecture(-134,7,5,13,32,4,'R');
+	unIndex.StatsCapteur(1124);
+}
+
 void TestsIndexStatsJSem1 ()
 {
 	Index unIndex;
@@ -217,6 +249,11 @@ void TestsTabEtatsConstructeur ()
 void TestsTabEtatsAjouterMesure ()
 {
 	TestsTabEtatsAjouterMesure1();
+}
+
+void TestsTabEtatsStatsCapteur ()
+{
+	TestsTabEtatsStatsCapteur1();
 }
 
 void TestsTabEtatsStatsJSem ()
@@ -255,6 +292,11 @@ void TestsIndexLecture ()
 	TestsIndexLecture1();
 }
 
+void TestsIndexStatsCapteur ()
+{
+	TestsIndexStatsCapteur1();
+}
+
 void TestsIndexStatsJSem ()
 {
 	TestsIndexStatsJSem1();
@@ -269,10 +311,11 @@ void TestsIndexEmbouteillageJSemHeure ()
 
 void TestsTabEtats ()
 {
-	TestsTabEtatsConstructeur();
-	TestsTabEtatsAjouterMesure();
-	TestsTabEtatsStatsJSem();
-	TestsTabEtatEmbouteillageJSemHeure();
+	//TestsTabEtatsConstructeur();
+	//TestsTabEtatsAjouterMesure();
+	TestsTabEtatsStatsCapteur();
+	//TestsTabEtatsStatsJSem();
+	//TestsTabEtatEmbouteillageJSemHeure();
 }
 
 void TestsIndex ()
@@ -281,15 +324,16 @@ void TestsIndex ()
 	//TestsIndexAjouterId();
 	//TestsIndexComparerId();
 	//TestsIndexLecture();
-	TestsIndexStatsJSem();
-	TestsIndexEmbouteillageJSemHeure();
+	TestsIndexStatsCapteur();
+	//TestsIndexStatsJSem();
+	//TestsIndexEmbouteillageJSemHeure();
 }
 
 
 
 void Tests ()
 {
-	//TestsTabEtats();
+	TestsTabEtats();
 	TestsIndex();
 }
 
@@ -297,11 +341,12 @@ void Tests ()
 
 int main ()
 {
-	cout << "Debut des tests" << endl;
-	Tests();
-	cout << "Fin des tests" << endl;
+	//cout << "Debut des tests" << endl;
+	//Tests();
+	//cout << "Fin des tests" << endl;
 
-	/*string commande;
+	Index unIndex;
+	string commande;
 	int idCapteur;
 	int annee;
 	int mois;
@@ -314,23 +359,19 @@ int main ()
 	cin >> commande;
 	while (commande != "EXIT")
 	{	if (commande == "ADD")
-		{	cout << "Effectuer boucle ADD" << endl;
-			cin >> idCapteur >> annee >> mois >> jour >> heure >> min >> jourSemaine >> trafic;
-			cout << idCapteur << " / " << annee << " / " << mois << " / " << jour << " / " << heure <<" / " << min << " / " << jourSemaine << " / " << trafic << endl;
+		{	cin >> idCapteur >> annee >> mois >> jour >> heure >> min >> jourSemaine >> trafic;
+			unIndex.Lecture(idCapteur,mois,jour,heure,min,jourSemaine,trafic);
 		} else if (commande == "STATS_C")
-		{	cout << "Effectuer boucle STATS_C" << endl;
-			cin >> idCapteur;
-			cout << idCapteur << endl;
+		{	cin >> idCapteur;
+			unIndex.StatsCapteur(idCapteur);
 		} else if (commande=="JAM_DH")
-		{	cout << "Effectuer boucle Jam_DH" << endl;
-			cin >> jourSemaine;
-			cout << jourSemaine << endl;
+		{	cin >> jourSemaine;
+			unIndex.EmbouteillageJSemHeure(jourSemaine);
 		} else if (commande=="STATS_D7")
-		{	cout << "Effectuer boucle STATS_D7" << endl;
-			cin >> jourSemaine;
-			cout << jourSemaine << endl;
+		{	cin >> jourSemaine;
+			unIndex.StatsJSem(jourSemaine);
 		}
 		cin >> commande;
-	}*/
+	}
 	return 0;
 }
