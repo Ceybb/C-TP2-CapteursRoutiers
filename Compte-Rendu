@@ -4,14 +4,14 @@ Alan Barzasi
 
 Compte rendu TP C++n°2 : Capteurs routiers
 
-	Après analyse du cahier des charges, nous avons pensé à une solution rudimentaire mais efficace où l'on manipulerait un grand tableau à 6 dimensions dont chaque dimension représenterait un membre de la date afin de pouvoir couvrir immédiatement tous les événements possibles pour un total de 1500 capteurs. Cette solution aurait été rapide mais évidemment très gourmande en mémoire et il nous a fallut la mettre de côté. 
+	Après analyse du cahier des charges, nous avons pensé à une solution rudimentaire mais supposément rapide en exécution où l'on manipulerait un grand tableau à 6 dimensions dont chaque dimension représenterait un membre de la date afin de pouvoir couvrir immédiatement tous les événements possibles pour un total de 1500 capteurs. Cette solution aurait été rapide mais évidemment très gourmande en mémoire et il nous a fallut la mettre de côté. 
 	Nous avons gardé l'idée de base qui est de créer un tableau pour y mettre tous les événements possible sur la plage de temps indiquée mais un tableau serait alors associé à un capteur et créé seulement si nécessaire, diminuant de manière conséquente la mémoire requise. On affinera également l'enregistrement des données.
 
 Présentation de la structure de données retenue :
 
-	La classe de base est TabEtats, un objet de cette classe contient ainsi un tableau de caractères à 5 dimensions de taille [5][5][24][60][7] représentant respectivement le mois, le jour, l'heure, la minute et le jour de la semaine d'une mesure, chaque case contient l'état ('V', 'O', 'R' ou 'N') du capteur à ce moment donné si l'information a été donnée, il contient 'A' sinon. Il a été possible d'économiser de la mémoire en ne créant que 5 cases pour les jours, car il n'y a par exemple que 5 lundis par mois au maximum. De même, il n' a que 5 mois sur la période de mai à septembre 2015
+	La classe de base est TabEtats, un objet de cette classe contient ainsi un tableau de caractères à 5 dimensions de taille [5][5][24][60][7] représentant respectivement le mois, le jour, l'heure, la minute et le jour de la semaine d'une mesure, chaque case contient l'état ('V', 'J', 'R' ou 'N') du capteur à ce moment donné si l'information a été donnée, il contient 'A' sinon. Il a été possible d'économiser de la mémoire en ne créant que 5 cases pour les jours, car il n'y a par exemple que 5 lundis par mois au maximum. De même, il n' a que 5 mois sur la période de mai à septembre 2015.
 
-	La classe maîtresse est Index, elle comprend 4 attributs : un tableau de pointeurs vers des éléments de type 'TabEtats' nommé 'index', le nombre de capteur pouvant être contenu par un index (ce nombre étant dynamique comme expliqué dans les spécifications de méthodes) 'nbCapteursMax', le nombre de capteur effectivement contenu dans l'index 'nbCapteursCourant' et enfin un tableau d'entiers contenant les identifiants des capteurs 'id' dont la taille peut également évoluer.
+	La classe maîtresse est Index, elle comprend 4 attributs : un tableau de pointeurs vers des éléments de type 'TabEtats' nommé 'index', le nombre de capteur pouvant être contenu par un index (ce nombre étant dynamique), 'nbCapteursMax', le nombre de capteur effectivement contenu dans l'index 'nbCapteursCourant' et enfin un tableau d'entiers contenant les identifiants des capteurs 'id' dont la taille peut également évoluer.
 
 	La classe CapteursRoutiers contient le main où est réalisé la lecture des commandes ainsi que tous les tests réalisés.
 
@@ -21,13 +21,13 @@ Spécifications des méthodes :
 Prend en paramètres tous les éléments donnés en entrées exceptée l'année dont on ne se sert pas. On effectue un test à l'aide d'une méthode annexe sur la liste de capteurs afin de voir si on possède déjà un 'TabEtats' associé à ce capteur, si non, on en crée un et on ajoute le capteur au tableau 'id'. On ajoute bien sûr l'état du capteur au moment donné dans le tableau correspondant.
 
 	Statistiques de trafic pour un capteur (commande STATS_C) 
-A pour unique paramètre l'identifiant du capteur dont on veut les statistiques, si celui-ci n'apparaît pas dans 'id', on indique que les résultats sont inconnus. Sinon, à l'aide d'une méthode de la classe 'TabEtats', on parcourt le tableau en incrémentant des compteurs à l'aide des données enregistrées afin de fournir les pourcentages.
+A pour unique paramètre l'identifiant du capteur dont on veut les statistiques, si celui-ci n'apparaît pas dans 'id', on indique que les résultats sont inconnus. Sinon, à l'aide d'une méthode de la classe 'TabEtats', on parcourt le tableau en incrémentant des compteurs selon les données enregistrées afin de calculer les pourcentages.
+
+	Statistiques de trafic par jour de la semaine (commande JAM_D7)
+Fonctionne de manière similaire à la méthode précédentes, en prenant cette fois en paramètre un jour de la semaine et non un unique capteur, on parcourt cette fois tous les tableaux d'états des capteurs enregistrés selon le jour demandé en prenant soin de compter le nombre de mesures pour chaque heures dans le but d'obtenir les statistiques. On indique que les résultats sont inconnus si aucune mesure n'a été effectuée. 
 
 	Embouteillage par jour de la semaine et par heure (commande JAM_DH)
 Cette méthode a également pour attribut un jour de la semaine en particulier, on considère qu'un état  'V' ou 'J' est normal et que les états 'R' et 'N' signifient une présence d'embouteillage. On réalise les statistiques en parcourant tous les 'TabEtats' au jour de la semaine entré en paramètre.
-
-	Statistiques de trafic par jour de la semaine (commande JAM_D7)
-Fonctionne de manière similaire à la méthode Statistiques pour un capteur, en prenant cette fois en paramètre un jour de la semaine et non un unique capteur, on parcourt cette fois tous les tableaux d'états des capteurs enregistrés selon le jour demandé en prenant soin de compter le nombre de mesures pour chaque heures dans le but d'obtenir les statistiques. On indique que les résultats sont inconnus si aucune mesure n'a été effectuée. 
 	
 	Moment de départ optimal (commande OPT)
 Les identifiants de segments correspondent aux identifiants de capteurs, si ceux ci n'ont pas été renseignés au moment requis, on moyenne les valeurs connues les plus proches dans le temps afin d'approximer l'état du trafic.
